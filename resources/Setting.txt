@@ -1,0 +1,16 @@
+CUBE-V1.01 
+UPDATE:N
+        FORMAT
+LightFrequency:0
+TimeStamp:0
+CycleRecord:0
+BuzzerVolume:5
+-------------------------------
+LightFrequency
+	0 ~ 1, def:0, 0:60Hz  1:50Hz
+TimeStamp
+	0 ~ 1, def:0, 0:Off   1:On
+CycleRecord
+	0 ~ 1, def:0, 0:Off   1:On
+BuzzerVolume
+	0 ~ 50, def:5 
