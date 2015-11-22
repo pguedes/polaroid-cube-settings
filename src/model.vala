@@ -41,10 +41,10 @@ namespace PolaroidCube.Model {
 	               this.light_frequency = int.parse(value);
 	               break;
 	            case TIME_STAMP_PROPERTY:
-	               this.time_stamp = bool.parse(value);
+	               this.time_stamp = "1" == value;
 	               break;
 	            case CYCLE_RECORDING_PROPERTY:
-	               this.cycle_recording = bool.parse(value);
+	               this.cycle_recording = "1" == value;
 	               break;
 	            case BUZZER_VOLUME_PROPERTY:
 	               this.buzzer_volume = int.parse(value);

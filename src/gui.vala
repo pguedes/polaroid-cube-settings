@@ -17,8 +17,8 @@ namespace PolaroidCube.UI {
 	    public signal void save_settings(CubeSettings settings);
 
 	    public SettingsGUI(CubeSettings cube_settings) throws Error {
-	        build_window();
 	        this.settings = cube_settings;
+	        build_window();
 	    }
 
         /**
@@ -32,6 +32,10 @@ namespace PolaroidCube.UI {
             this.window = builder.get_object("window") as Window;
             this.light_fifty_button = builder.get_object("light_fifty") as ToggleButton;
             this.light_sixty_button = builder.get_object("light_sixty") as ToggleButton;
+
+            var activeLightButton =
+                this.settings.light_frequency == 1 ? this.light_fifty_button : this.light_sixty_button;
+            activeLightButton.active = true;
 
             window.destroy.connect(Gtk.main_quit);
             builder.connect_signals(this);
@@ -56,16 +60,28 @@ namespace PolaroidCube.UI {
         // polaroid_cube_ui_settings_gui_change_timestamp
         [CCode (instance_pos = -1)]
         public bool change_timestamp(Switch it, bool active) {
-            stdout.printf("updating state: %s\n", active.to_string());
             this.settings.time_stamp = active;
+            return false;
+        }
+
+        // polaroid_cube_ui_settings_gui_init_timestamp
+        [CCode (instance_pos = -1)]
+        public bool init_timestamp(Switch it) {
+            it.set_active(this.settings.time_stamp);
             return false;
         }
 
         // polaroid_cube_ui_settings_gui_change_cycle_recording
         [CCode (instance_pos = -1)]
         public bool change_cycle_recording(Switch it, bool active) {
-            stdout.printf("updating cycle recording state: %s\n", active.to_string());
             this.settings.cycle_recording = active;
+            return false;
+        }
+
+        // polaroid_cube_ui_settings_gui_init_cycle_recording
+        [CCode (instance_pos = -1)]
+        public bool init_cycle_recording(Switch it) {
+            it.set_active(this.settings.cycle_recording);
             return false;
         }
 
@@ -76,14 +92,22 @@ namespace PolaroidCube.UI {
             return false;
         }
 
+        // polaroid_cube_ui_settings_gui_init_buzzer_volume
+        [CCode (instance_pos = -1)]
+        public bool init_buzzer_volume(Scale adjustment) {
+            adjustment.set_value(this.settings.buzzer_volume);
+            return false;
+        }
+
         // polaroid_cube_ui_settings_gui_on_save
         [CCode (instance_pos = -1)]
         public void on_save(Button source) {
             this.save_settings(this.settings);
         }
 
-        public void show(){
-            this.window.show_all ();
+        public SettingsGUI show(){
+            this.window.show_all();
+            return this;
         }
 	}
 }
