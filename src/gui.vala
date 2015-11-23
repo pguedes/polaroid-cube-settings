@@ -27,7 +27,7 @@ namespace PolaroidCube.UI {
         private void build_window() throws Error {
             var builder = new Builder();
 
-            builder.add_from_file("polaroid-cube-settings-window.glade");
+            builder.add_from_resource("/pt/PolaroidCube/polaroid-cube-settings-window.glade");
 
             this.window = builder.get_object("window") as Window;
             this.light_fifty_button = builder.get_object("light_fifty") as ToggleButton;
