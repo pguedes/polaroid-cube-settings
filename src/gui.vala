@@ -5,11 +5,12 @@ namespace PolaroidCube.UI {
 
 	public class SettingsGUI {
 
-	    private Window window;
 	    private ToggleButton light_fifty_button;
 	    private ToggleButton light_sixty_button;
 
 	    private CubeSettings settings;
+
+        public Window window { get; set; }
 
         /**
         * Signal to save the settings
